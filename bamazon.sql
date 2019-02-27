@@ -22,4 +22,5 @@ INSERT INTO products (product_name, department_name, price,stock_quantity)
 VALUES ("laptop", 'electronics', 200,3);
 
 
+
 SELECT * FROM products;
