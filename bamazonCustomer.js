@@ -37,13 +37,25 @@ function purchase() {
                     item_id: responseUserIDAnswer.product_id
                 }, function (err, responseToAmountQuery) {
                     if (err) throw err;
-                    connection.end();
-                    console.log("You selected " + responseToIdQuery[0].product_name)
-                    console.log("We have "+ responseToAmountQuery[0].stock_quantity+ " in stock")
-                    console.log("Amount requested " + resAmount.amount);
-                
+                    if (resAmount.amount > responseToAmountQuery[0].stock_quantity){
+                        console.log("We don't have that amount in stock.")
+                    }
+                    else {
+                        console.log("Your order of " + responseToIdQuery[0].product_name + "was successful.")
+                        connection.query("SELECT price FROM products Where ?", {
+                            item_id: responseUserIDAnswer.product_id
+                        }, function (err, responseToPriceQuery) {
+                        console.log("The cost of the item "+ responseToPriceQuery[0].price)
+                        connection.end();    
+                    })  
+                    }
+                    
+                   
+                   
                 })
+              
             })
+            
         });
 
     })
