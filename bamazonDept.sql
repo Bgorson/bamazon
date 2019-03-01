@@ -1,0 +1,1 @@
+Enter MYSQL Data for making a dept table
