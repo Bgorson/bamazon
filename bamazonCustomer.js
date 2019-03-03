@@ -87,7 +87,7 @@ function addProfitsToItem(id,profit){
         //update the stock
         "UPDATE products SET product_sales=product_sales +" + profit + " WHERE item_id="+id,
         function (err, res) {
-            console.log(res)
+           
         }) 
         Dept(id,profit)      
 }
@@ -99,25 +99,13 @@ function Dept(id,profit){
         connection.query(
             "UPDATE departments SET product_sales=product_sales +" + profit + " WHERE department_name= '"+ responseToDeptQuery[0].department_name+"'",
             function (err, res) {
-                console.log(res)
+                console.log("This purchase cost $"+ profit)
             })       
             connection.end();
         }
     )
    
 }
-
-// function addProfitsToDept(dept,profit){
-//     console.log("dept " +dept)
-//     console.log("profit" + profit)
-//     connection.query(
-//         "UPDATE departments SET product_sales=product_sales +" + profit + " WHERE department_name="+ dept,
-//         function (err, res) {
-//             console.log(res)
-//         })       
-//         connection.end();
-// }
-
 
 function displayInventory() {
     //all items are shown and formated

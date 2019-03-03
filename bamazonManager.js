@@ -96,13 +96,11 @@ function addToInventory() {
             }
         ]).then(function (selectedItem) {
                 let amountSelected = selectedItem.amount
-                console.log(amountSelected)
                 let indexOfItem = currentProductsArray.indexOf(selectedItem.updateSelection)
-                console.log(allItemsQuery[indexOfItem].product_name)
                 connection.query(
                     "UPDATE products SET stock_quantity= stock_quantity + "+ amountSelected +" WHERE product_name= '"+ allItemsQuery[indexOfItem].product_name+ "'",
                     function (err, res) {
-                        console.log("Purchased")
+                        console.log("Added " + amountSelected + " " + allItemsQuery[indexOfItem].product_name)
                 })
                 connection.end();
             })
@@ -143,6 +141,7 @@ function addNewProduct() {
                 department_name: newProductRes.department,
                 price: newProductRes.price,
                 stock_quantity: newProductRes.stock,
+                product_sales:0
             }
         )
         connection.end();
