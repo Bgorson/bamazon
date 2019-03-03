@@ -87,6 +87,7 @@ function addProfitsToItem(id,profit){
         //update the stock
         "UPDATE products SET product_sales=product_sales +" + profit + " WHERE item_id="+id,
         function (err, res) {
+            console.log(res)
         }) 
         Dept(id,profit)      
 }
@@ -98,7 +99,7 @@ function Dept(id,profit){
         connection.query(
             "UPDATE departments SET product_sales=product_sales +" + profit + " WHERE department_name= '"+ responseToDeptQuery[0].department_name+"'",
             function (err, res) {
-                console.log("Purchased")
+                console.log(res)
             })       
             connection.end();
         }
