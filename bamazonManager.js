@@ -82,27 +82,34 @@ function addToInventory() {
             for (i = 0; i < allItemsQuery.length; i++) {
                 (currentProductsArray.push(allItemsQuery[i].product_name))
             }
-            inquirer.prompt({
+            inquirer.prompt(
+                [{
                 name: "updateSelection",
                 type: "list",
                 message: "Which product's stock would you like to increase?",
                 choices: currentProductsArray
-            }).then(function (selectedItem) {
-                //whichever item is selected gains 5 additional stocks
+            },
+            {
+            name:"amount",
+            type: "input",
+            message: "How much would you like to increase it by?",
+            }
+        ]).then(function (selectedItem) {
+                let amountSelected = selectedItem.amount
+                console.log(amountSelected)
                 let indexOfItem = currentProductsArray.indexOf(selectedItem.updateSelection)
                 console.log(allItemsQuery[indexOfItem].product_name)
-                connection.query("UPDATE products SET ? WHERE ?",
-                    [{
-                            stock_quantity: (allItemsQuery[indexOfItem].stock_quantity + 5)
-                        },
-                        {
-                            product_name: allItemsQuery[indexOfItem].product_name
-                        }
-                    ])
+                connection.query(
+                    "UPDATE products SET stock_quantity= stock_quantity + "+ amountSelected +" WHERE product_name= '"+ allItemsQuery[indexOfItem].product_name+ "'",
+                    function (err, res) {
+                        console.log("Purchased")
+                })
                 connection.end();
             })
         })
 }
+
+
 function addNewProduct() {
     //prompts user to submit relevant information and creates a response from it
     console.log("Add your new product's information here")
