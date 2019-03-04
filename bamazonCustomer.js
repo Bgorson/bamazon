@@ -19,8 +19,6 @@ const connection = mysql.createConnection({
 
 
 
-
-
 function purchase() {
     // prompts user to enter the ID and amount
     inquirer.prompt([{
@@ -47,7 +45,6 @@ function checkForStock(amount,id){
         if (amount > responseToAmountQuery[0].stock_quantity) {
             console.log("\n \n*********We don't have that amount in stock.*************\n")
             displayInventory();
-            connection.end();
         } else {
             updateStock(amount,id,responseToAmountQuery[0].stock_quantity)
         }
