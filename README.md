@@ -17,3 +17,5 @@ Users can choose to view the department sales for products that have the same 'd
 This app is built using javascript, mySQL, inquirer and my-tables. SQL database structure examples are included. 
 
 View the following video to see the application in action: 
+
+https://drive.google.com/file/d/1IUWNpytEV8HSdPdfVsxFq77tg6aeD84w/view
